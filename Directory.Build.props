@@ -22,13 +22,13 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>https://github.com/Stillpoint-Software/Hyperbee.Expressions/releases/latest</PackageReleaseNotes>
-    <RepositoryUrl>https://github.com/Stillpoint-Software/hyperbee.expressions</RepositoryUrl>
+    <PackageReleaseNotes>https://github.com/Stillpoint-Software/hyperbee.expressions.compiler/releases/latest</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/Stillpoint-Software/hyperbee.expressions.compiler</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageProjectUrl>https://github.com/Stillpoint-Software/hyperbee.expressions</PackageProjectUrl>
+    <PackageProjectUrl>https://stillpoint-software.github.io/hyperbee.expressions.compiler/</PackageProjectUrl>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(IsPackable)' == 'true' AND '$(MSBuildProjectName)' != 'Hyperbee.Expressions.Compiler'">
+  <ItemGroup Condition="'$(IsPackable)' == 'true'">
     <None Include="$(MSBuildThisFileDirectory)README.md"
           Pack="true"
           PackagePath=""

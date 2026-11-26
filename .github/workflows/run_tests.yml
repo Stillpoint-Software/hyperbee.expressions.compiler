@@ -1,0 +1,54 @@
+name: Run Tests
+
+on:
+  workflow_run:
+    workflows: [Create Release]
+    types: [requested]
+    branches: [main]
+  workflow_dispatch:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    branches: [main]
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      branch_name: ${{ steps.set_branch.outputs.branch_name }}
+
+    steps:
+      - id: set_branch
+        shell: bash
+        run: |
+          # Pick the ref to test for each trigger type.
+          # For pull_request, test the PR head SHA (the incoming changes),
+          # not the base branch. Using the SHA is deterministic even if
+          # the PR branch is later force-pushed.
+          if [[ "${{ github.event_name }}" == "workflow_run" ]]; then
+            RAW='${{ github.event.workflow_run.head_sha }}'
+          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            RAW='${{ github.event.pull_request.head.sha }}'
+          else
+            RAW='${{ github.ref }}'
+          fi
+
+          # Strip the refs/heads/ prefix if present (only relevant for the push/dispatch fallback)
+          CLEAN="${RAW#refs/heads/}"
+
+          echo "Detected ref: $CLEAN"
+          echo "branch_name=$CLEAN" >> "$GITHUB_OUTPUT"
+
+  test:
+    needs: discover
+    uses: Stillpoint-Software/shared-workflows/.github/workflows/run_tests.yml@main
+    with:
+      branch: ${{ needs.discover.outputs.branch_name }}
+      solution_name: ${{ vars.SOLUTION_NAME }}
+      # Keep in step with <TargetFrameworks> in Directory.Build.props.
+      # netstandard2.1 is built but not tested: it has no test host.
+      frameworks: '["net11.0", "net10.0"]'
+    secrets: inherit

@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="Directory.Packages.props" />
+    <File Path="Hyperbee.ExpressionCompiler.md" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+    <File Path="version.json" />
+  </Folder>
+  <Folder Name="/Solution Items/assets/">
+    <File Path="assets/hyperbee.svg" />
+    <File Path="assets/icon.png" />
+  </Folder>
+  <Folder Name="/Solution Tests/">
+    <Project Path="test/Hyperbee.Expressions.Compiler.Benchmarks/Hyperbee.Expressions.Compiler.Benchmarks.csproj" />
+    <Project Path="test/Hyperbee.Expressions.Compiler.IssueTests/Hyperbee.Expressions.Compiler.IssueTests.csproj" />
+    <Project Path="test/Hyperbee.Expressions.Compiler.Tests/Hyperbee.Expressions.Compiler.Tests.csproj" />
+    <Project Path="test/ILComparisonTool/ILComparisonTool.csproj" />
+  </Folder>
+  <Project Path="src/Hyperbee.Expressions.Compiler/Hyperbee.Expressions.Compiler.csproj" />
+</Solution>
