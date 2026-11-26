@@ -20,7 +20,7 @@ HEC is consistently **9.3-48x faster than the System Compiler** and within **1.1
 package. FEC does not support them. HEC compiles them about **twice as fast as the System
 compiler**, and the compiled coroutines run **16-24x faster**.
 
-A lambda invoked in place (`Expression.Invoke( lambda, args )`) is inlined at the call site, so it needs no second compilation and captures nothing. See [Invoked lambdas](docs/site/performance.md#invoked-lambdas).
+A lambda invoked in place (`Expression.Invoke( lambda, args )`) is inlined at the call site, so it needs no second compilation and captures nothing. See [Invoked lambdas](https://stillpoint-software.github.io/hyperbee.expressions.compiler/performance.html#invoked-lambdas).
 
 The Complex tier standout (48x vs System) is where the multi-pass IR architecture pays off against the System compiler's heavyweight compilation pipeline. The Loop tier at 1.53x is the widest gap vs FEC, and Simple at 1.15x the narrowest. FEC 6.0.0 compiles faster than HEC on every tier; an earlier version of this file named Simple as HEC's one win, which was a regression in FEC 5.4.1 rather than a result of ours.
 
@@ -77,7 +77,7 @@ compiler allocates per call.
 Compiled delegates execute at equivalent speed whichever compiler produced them. HEC costs about
 **0.4 nanoseconds** more per call than the System compiler, flat across body sizes -- a property of
 reaching the delegate, not of the code inside it -- and is indistinguishable from FEC at
-0.98-1.00x. See [Execution Speed](docs/site/performance.md#execution-speed).
+0.98-1.00x. See [Execution Speed](https://stillpoint-software.github.io/hyperbee.expressions.compiler/performance.html#execution-speed).
 
 For hot paths that compile once and cache, the allocation difference is negligible. For workloads
 that re-compile frequently (dynamic LINQ providers, interpreted rule engines), prefer FEC when its
@@ -114,7 +114,7 @@ boundaries. It was not that. Delegates over a static method with nothing bound h
 the slot `Delegate.Invoke` passes one in, so the runtime inserts a thunk that shifts every argument
 down one on the way through. Every compiled delegate is now closed over its constants array, empty
 when there is nothing to read, which is the shape the System compiler uses. See
-[Execution Speed](docs/site/performance.md#execution-speed).
+[Execution Speed](https://stillpoint-software.github.io/hyperbee.expressions.compiler/performance.html#execution-speed).
 
 ### Compiler Comparison
 
@@ -291,4 +291,4 @@ dotnet add package Hyperbee.Expressions            # only if you want async/yiel
 
 ## License
 
-Licensed under the [MIT License](LICENSE).
+Licensed under the [MIT License](https://github.com/Stillpoint-Software/hyperbee.expressions.compiler/blob/main/LICENSE).
