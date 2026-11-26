@@ -12,11 +12,18 @@
   </ItemGroup>
   <ItemGroup>
     <!--
-      The expression library this compiler plugs into. It owns the extension nodes
-      (AsyncBlockExpression, EnumerableBlockExpression) and the coroutine contract
-      (ICoroutineDelegateBuilder, CoroutineBuilderContext) that HEC implements.
+      The contracts this compiler implements: ICoroutineDelegateBuilder,
+      ICoroutineMethodBuilder, IExpressionCompiler, ICoroutineBoundary, plus
+      CoroutineBuilderContext and CoroutineClosureRewriter. This package has no
+      dependencies of its own, so the compiler library takes none either.
     -->
-    <PackageVersion Include="Hyperbee.Expressions" Version="1.6.1" />
+    <PackageVersion Include="Hyperbee.Expressions.Abstractions" Version="1.7.0" />
+    <!--
+      The expression library itself, which owns AsyncBlockExpression and
+      BlockAsync. Only the tests and benchmarks need it: they build the coroutine
+      trees that the compiler is pointed at. The shipped library does not.
+    -->
+    <PackageVersion Include="Hyperbee.Expressions" Version="1.7.0" />
     <!-- netstandard2.1 support only; see src/Shared and the csproj conditions. -->
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="11.0.0" />
   </ItemGroup>

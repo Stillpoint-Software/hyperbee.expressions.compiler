@@ -25,13 +25,14 @@
   </ItemGroup>
 
   <!--
-    The expression library this compiler plugs into. HEC implements its coroutine
-    contract (ICoroutineDelegateBuilder, ICoroutineMethodBuilder, IExpressionCompiler)
-    and recognizes its extension nodes (AsyncBlockExpression, EnumerableBlockExpression).
-    Only 4 of this project's 21 files touch it.
+    The contracts this compiler implements: ICoroutineDelegateBuilder,
+    ICoroutineMethodBuilder and IExpressionCompiler, plus the CoroutineBuilderContext
+    ambient and the CoroutineClosureRewriter it runs before emitting. Coroutine nodes
+    are recognized through ICoroutineBoundary rather than by their concrete types, so
+    nothing here needs Hyperbee.Expressions, and this package brings no dependencies.
   -->
   <ItemGroup>
-    <PackageReference Include="Hyperbee.Expressions" />
+    <PackageReference Include="Hyperbee.Expressions.Abstractions" />
   </ItemGroup>
 
   <ItemGroup>

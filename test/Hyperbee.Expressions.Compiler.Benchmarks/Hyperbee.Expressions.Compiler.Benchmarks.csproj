@@ -13,6 +13,8 @@
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" />
     <PackageReference Include="FastExpressionCompiler" />
+    <!-- Builds the BlockAsync and BlockEnumerable trees the compiler is pointed at. -->
+    <PackageReference Include="Hyperbee.Expressions" />
   </ItemGroup>
 
   <ItemGroup>

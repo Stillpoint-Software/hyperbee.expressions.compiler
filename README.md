@@ -235,6 +235,28 @@ have in box: the compiler-required attributes, an empty-collection helper and tw
 argument-check helpers. No compiler API is withheld on that target. The asset also
 pulls `Microsoft.Bcl.AsyncInterfaces` 8.0.0 for `IAsyncEnumerable`.
 
+## Dependencies
+
+One package: [`Hyperbee.Expressions.Abstractions`](https://www.nuget.org/packages/Hyperbee.Expressions.Abstractions),
+which itself has none.
+
+That package holds the contracts this compiler implements, `ICoroutineDelegateBuilder`,
+`ICoroutineMethodBuilder` and `IExpressionCompiler`, along with the
+`CoroutineBuilderContext` ambient and the `CoroutineClosureRewriter` the compiler runs
+before it emits. Coroutine blocks are recognized through `ICoroutineBoundary` rather
+than by their concrete types.
+
+So compiling ordinary expression trees needs nothing else. You add
+[`Hyperbee.Expressions`](https://www.nuget.org/packages/Hyperbee.Expressions) only if
+you want its extension nodes, `BlockAsync` and `BlockEnumerable` among them, and that
+is the package that brings `Hyperbee.Collections` and three `Microsoft.Extensions`
+packages with it.
+
+```
+dotnet add package Hyperbee.Expressions.Compiler   # the compiler, and nothing else
+dotnet add package Hyperbee.Expressions            # only if you want async/yield nodes
+```
+
 ## Credits
 
 - [FastExpressionCompiler](https://github.com/dadhi/FastExpressionCompiler) by Maksim Volkau -

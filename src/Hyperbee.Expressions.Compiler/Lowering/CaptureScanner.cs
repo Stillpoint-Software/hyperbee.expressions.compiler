@@ -1,5 +1,5 @@
 using System.Linq.Expressions;
-using Hyperbee.Expressions;
+using Hyperbee.Expressions.CompilerServices;
 
 namespace Hyperbee.Expressions.Compiler.Lowering;
 
@@ -37,12 +37,10 @@ public static class CaptureScanner
     /// </summary>
     private static IReadOnlyList<ParameterExpression>? CoroutineVariables( Expression node )
     {
-        return node switch
-        {
-            AsyncBlockExpression asyncBlock => asyncBlock.Variables,
-            EnumerableBlockExpression enumerableBlock => enumerableBlock.Variables,
-            _ => null
-        };
+        // Matched through ICoroutineBoundary, not the concrete node types, so this
+        // compiler does not need to reference Hyperbee.Expressions to recognize a
+        // coroutine block.
+        return node is ICoroutineBoundary boundary ? boundary.Variables : null;
     }
 
     private sealed class DeclarationScanner : ExpressionVisitor
