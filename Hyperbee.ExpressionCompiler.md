@@ -8,7 +8,7 @@ and completeness of the System Expression Compiler.
 > record of how the compiler was built. Target frameworks and benchmark figures inside
 > it describe the state at the time each phase was written and are no longer current.
 > The shipped targets are `net11.0`, `net10.0` and `netstandard2.1`. For current
-> numbers see [docs/site/compiler/performance.md](docs/site/compiler/performance.md)
+> numbers see [docs/site/performance.md](docs/site/performance.md)
 > and the package README.
 
 ---

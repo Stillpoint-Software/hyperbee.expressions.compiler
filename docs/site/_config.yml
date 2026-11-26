@@ -1,0 +1,29 @@
+title: Hyperbee Expression Compiler
+description: >-
+  Documentation for Hyperbee.Expressions.Compiler (HEC), a high-performance IR-based
+  compiler for .NET expression trees that emits IL directly.
+remote_theme: just-the-docs/just-the-docs
+baseurl: "/hyperbee.expressions.compiler/"
+url: "https://stillpoint-software.github.io"
+
+aux_links:
+  "GitHub Repository":
+    - "//github.com/Stillpoint-Software/hyperbee.expressions.compiler"
+
+footer_content: |
+  <div>
+    <span>&copy; <span id="copyright-year"></span> <a href='https://www.stillpointsoftware.net/'>Stillpoint Software</a>.</span>
+    <script>
+      document.getElementById("copyright-year").textContent = new Date().getFullYear();
+    </script>
+  </div>
+
+search_enabled: true
+
+nav_external_links:
+  - title: Hyperbee Expressions
+    url: https://stillpoint-software.github.io/hyperbee.expressions/
+    opens_in_new_tab: true
+  - title: Stillpoint Software
+    url: https://www.stillpointsoftware.net/
+    opens_in_new_tab: true

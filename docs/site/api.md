@@ -1,8 +1,7 @@
 ---
 layout: default
 title: API Reference
-parent: Compiler
-nav_order: 2
+nav_order: 3
 ---
 
 # API Reference

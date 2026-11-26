@@ -1,11 +1,10 @@
 ---
 layout: default
-title: Compiler
-has_children: true
-nav_order: 4
+title: Home
+nav_order: 1
 ---
 
-# Compiler
+# Hyperbee Expression Compiler
 
 `Hyperbee.Expressions.Compiler` is a high-performance, IR-based compiler for .NET expression trees.
 It is a drop-in replacement for `Expression.Compile()` that emits IL directly, bypassing the System

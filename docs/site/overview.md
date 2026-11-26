@@ -1,8 +1,7 @@
 ---
 layout: default
 title: Overview
-parent: Compiler
-nav_order: 1
+nav_order: 2
 ---
 
 # Compiler Overview

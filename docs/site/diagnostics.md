@@ -1,8 +1,7 @@
 ---
 layout: default
 title: Diagnostics
-parent: Compiler
-nav_order: 3
+nav_order: 4
 ---
 
 # Diagnostics
