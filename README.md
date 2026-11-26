@@ -197,22 +197,43 @@ var result = (int) type.GetMethod( "Add" )!.Invoke( null, [1, 2] )!; // 3
 The compiler uses a four-stage pipeline:
 
 ```
-Expression Tree
-      |
-      v
-  [1. Lower]         ExpressionLowerer: tree → flat IR instruction stream
-      |
-      v
-  [2. Transform]     StackSpillPass → PeepholePass → DeadCodePass → IRValidator
-      |
-      v
-  [3. Map]           Build constants array for non-embeddable values
-      |
-      v
-  [4. Emit]          ILEmissionPass: IR → CIL via ILGenerator → DynamicMethod
-      |
-      v
-    Delegate
+                            LambdaExpression
+                                    │
+                                    ▼
+┌───────────────────────────────────┴──────────────────────────────────┐
+│ 1 · Lower                                          ExpressionLowerer │
+├──────────────────────────────────────────────────────────────────────┤
+│ Expression tree becomes a flat IR instruction stream (IROp).         │
+└───────────────────────────────────┬──────────────────────────────────┘
+                                    │
+                                    ▼
+┌───────────────────────────────────┴──────────────────────────────────┐
+│ 2 · Transform                                    optimization passes │
+├──────────────────────────────────────────────────────────────────────┤
+│ StackSpillPass   empty the evaluation stack at exception boundaries  │
+│ PeepholePass     nine local rewrites: load/store, box/unbox,         │
+│                  dup/pop, branch fusion                              │
+│ DeadCodePass     remove unreachable instructions                     │
+│ IRValidator      structural correctness checks (debug builds)        │
+└───────────────────────────────────┬──────────────────────────────────┘
+                                    │
+                                    ▼
+┌───────────────────────────────────┴──────────────────────────────────┐
+│ 3 · Map                                              constants array │
+├──────────────────────────────────────────────────────────────────────┤
+│ Non-embeddable constants (object refs, delegates, nested lambdas)    │
+│ move to a captured array; operands become indices.                   │
+└───────────────────────────────────┬──────────────────────────────────┘
+                                    │
+                                    ▼
+┌───────────────────────────────────┴──────────────────────────────────┐
+│ 4 · Emit                                              ILEmissionPass │
+├──────────────────────────────────────────────────────────────────────┤
+│ IR becomes CIL, emitted through ILGenerator into a DynamicMethod.    │
+└───────────────────────────────────┬──────────────────────────────────┘
+                                    │
+                                    ▼
+                                Delegate
 ```
 
 ### Optimization Passes
