@@ -13,9 +13,12 @@ Hyperbee takes a middle ground: a **multi-pass IR pipeline** that lowers express
 
 ## Performance
 
-HEC is consistently **9.3-48x faster than the System Compiler** and within **1.15-1.53x of FEC** across all tiers - while producing correct IL for the sub-set of patterns FEC does not support or miscompiles.
+HEC is consistently **9.3-48x faster than the System Compiler** and within **1.15-1.53x of FEC** across all tiers - while producing correct IL for the sub-set of patterns FEC does not support.
 
-For `BlockAsync` and `BlockEnumerable`, which FEC does not support, HEC compiles about **twice as fast as the System compiler** and the compiled coroutines run **16-24x faster**.
+`BlockAsync` and `BlockEnumerable` are async/await and yield-return expression tree nodes from
+[Hyperbee.Expressions](https://github.com/Stillpoint-Software/hyperbee.expressions), a separate
+package. FEC does not support them. HEC compiles them about **twice as fast as the System
+compiler**, and the compiled coroutines run **16-24x faster**.
 
 A lambda invoked in place (`Expression.Invoke( lambda, args )`) is inlined at the call site, so it needs no second compilation and captures nothing. See [Invoked lambdas](docs/site/performance.md#invoked-lambdas).
 

@@ -13,28 +13,28 @@ four-stage pipeline: **Lower -> Transform -> Map -> Emit**.
 
 ## Compilation Pipeline
 
-```
-LambdaExpression
-       |
-       v
-  [ 1. Lower ]          ExpressionLowerer
-  Expression tree -> flat IR instruction stream (IROp)
-       |
-       v
-  [ 2. Transform ]      Optimization passes
-  StackSpillPass        -- empty the evaluation stack at exception boundaries
-  PeepholePass          -- nine local rewrites: load/store, box/unbox, dup/pop, branch fusion
-  DeadCodePass          -- remove unreachable instructions
-  IRValidator           -- structural correctness checks (debug builds)
-       |
-       v
-  [ 3. Map ]            Constants array construction
-  Collect non-embeddable constants (object refs, delegates, nested lambdas)
-  into a captured array; replace operands with indices
-       |
-       v
-  [ 4. Emit ]           ILEmissionPass
-  IR -> CIL -> DynamicMethod delegate
+```mermaid
+flowchart TB
+    IN(["LambdaExpression"])
+
+    L["1 - Lower - ExpressionLowerer<br/>expression tree becomes a flat IR instruction stream (IROp)"]
+
+    subgraph S2["2 - Transform - optimization passes"]
+        direction TB
+        T1["StackSpillPass - empty the evaluation stack at exception boundaries"]
+        T2["PeepholePass - nine local rewrites: load/store, box/unbox, dup/pop, branch fusion"]
+        T3["DeadCodePass - remove unreachable instructions"]
+        T4["IRValidator - structural correctness checks, debug builds"]
+        T1 --> T2 --> T3 --> T4
+    end
+
+    M["3 - Map - constants array<br/>non-embeddable constants (object refs, delegates, nested lambdas)<br/>move to a captured array, operands become indices"]
+
+    E["4 - Emit - ILEmissionPass<br/>IR becomes CIL, emitted through ILGenerator into a DynamicMethod"]
+
+    OUT(["Delegate"])
+
+    IN --> L --> S2 --> M --> E --> OUT
 ```
 
 ---

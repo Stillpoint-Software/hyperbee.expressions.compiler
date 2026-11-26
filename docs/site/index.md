@@ -52,3 +52,9 @@ services.AddSingleton<IExpressionCompiler>( HyperbeeExpressionCompiler.Instance 
 - Supports all expression patterns -- including those FEC does not support
 - Fully compatible with `AsyncBlockExpression` state machines via ambient context
 - `IExpressionCompiler` interface for DI-friendly injection
+
+Coroutines here means `BlockAsync` and `BlockEnumerable`, the async/await and yield-return
+expression tree nodes from
+[Hyperbee.Expressions](https://github.com/Stillpoint-Software/hyperbee.expressions), a separate
+package. The compiler needs only `Hyperbee.Expressions.Abstractions`; add that package if you
+want the nodes themselves.

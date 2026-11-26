@@ -165,11 +165,15 @@ harness, and not specific to HEC.
 | Maximum compatibility, no extra dependency | SEC (`lambda.Compile()`) |
 
 FEC compiles faster than HEC on every tier here and allocates less on every tier. Where HEC wins is
-coroutines, which FEC does not support, and the patterns FEC declines or miscompiles.
+coroutines and the other patterns FEC does not support.
 
 ---
 
 ## Coroutine bodies
+
+`BlockAsync` and `BlockEnumerable` are async/await and yield-return expression tree nodes from
+[Hyperbee.Expressions](https://github.com/Stillpoint-Software/hyperbee.expressions), a separate
+package. The System compiler can run them; FEC cannot.
 
 Execution, per call. 20 iterations, 8 warmup.
 
