@@ -2,17 +2,13 @@
 name: Deploy GitHub Pages
 
 on:
-  # Manual only while this repository is private.
-  #
-  # On the GitHub Team plan a private repository can publish Pages, but the
-  # published site is PUBLIC; private site visibility needs Enterprise Cloud.
-  # Deploying from here before the repository goes public would therefore make
-  # the docs public ahead of the code.
-  #
-  # Restore the push trigger below when the repository is made public:
-  #
-  #   push:
-  #     branches: ["main"]
+  # Restored when the repository was made public. It was manual-only before
+  # that: on the GitHub Team plan a private repository can publish Pages, but
+  # the published site is PUBLIC, so deploying would have put the docs online
+  # ahead of the code.
+  push:
+    branches: ["main"]
+
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
