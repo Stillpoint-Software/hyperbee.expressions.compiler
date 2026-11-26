@@ -2,8 +2,12 @@ title: Hyperbee Expression Compiler
 description: >-
   Documentation for Hyperbee.Expressions.Compiler (HEC), a high-performance IR-based
   compiler for .NET expression trees that emits IL directly.
-remote_theme: just-the-docs/just-the-docs
-baseurl: "/hyperbee.expressions.compiler/"
+# Pinned. Unpinned, remote_theme tracks the theme's default branch, so an
+# upstream commit can change this site's rendering with no change here.
+remote_theme: just-the-docs/just-the-docs@v0.12.0
+# No trailing slash: Jekyll appends the page path, and a trailing slash here
+# produces doubled slashes in every generated URL.
+baseurl: "/hyperbee.expressions.compiler"
 url: "https://stillpoint-software.github.io"
 
 aux_links:
