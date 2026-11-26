@@ -9,24 +9,27 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
+  </ItemGroup>
+  <ItemGroup>
+    <!--
+      The expression library this compiler plugs into. It owns the extension nodes
+      (AsyncBlockExpression, EnumerableBlockExpression) and the coroutine contract
+      (ICoroutineDelegateBuilder, CoroutineBuilderContext) that HEC implements.
+    -->
+    <PackageVersion Include="Hyperbee.Expressions" Version="1.6.1" />
     <!-- netstandard2.1 support only; see src/Shared and the csproj conditions. -->
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="11.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Test and benchmark only -->
     <PackageVersion Include="BenchmarkDotNet" Version="0.15.8" />
-    <PackageVersion Include="DotNext.Metaprogramming" Version="6.13.0" />
     <PackageVersion Include="FastExpressionCompiler" Version="6.0.0" />
     <PackageVersion Include="coverlet.collector" Version="10.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
-    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="11.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="11.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="11.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Http" Version="11.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.12.0" />
     <PackageVersion Include="MSTest.TestAdapter" Version="4.5.3" />
     <PackageVersion Include="MSTest.TestFramework" Version="4.5.3" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="11.0.0" />
-    <PackageVersion Include="Hyperbee.Json" Version="3.3.2" />
-    <PackageVersion Include="Hyperbee.Collections" Version="2.8.0" />
   </ItemGroup>
 </Project>

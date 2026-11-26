@@ -10,29 +10,28 @@
     <PackageTags>expression-tree;expressions;compiler;il;emit</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
     <IsPackable>true</IsPackable>
-    <PackageProjectUrl>https://stillpoint-software.github.io/hyperbee.expressions/</PackageProjectUrl>
+    <PackageProjectUrl>https://stillpoint-software.github.io/hyperbee.expressions.compiler/</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Copyright>Stillpoint Software, Inc.</Copyright>
     <Title>Hyperbee Expressions Compiler</Title>
     <Description>High-performance IR-based expression compiler for .NET.</Description>
-    <RepositoryUrl>https://github.com/Stillpoint-Software/hyperbee.expressions</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Stillpoint-Software/hyperbee.expressions.compiler</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>https://github.com/Stillpoint-Software/Hyperbee.Expressions/releases/latest</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/Stillpoint-Software/hyperbee.expressions.compiler/releases/latest</PackageReleaseNotes>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="README.md"
-          Pack="true"
-          PackagePath=""
-          Link="README.md" />
-  </ItemGroup>
-  
   <ItemGroup>
     <None Update="$(MSBuildProjectName).csproj.DotSettings" Visible="false" />
   </ItemGroup>
 
+  <!--
+    The expression library this compiler plugs into. HEC implements its coroutine
+    contract (ICoroutineDelegateBuilder, ICoroutineMethodBuilder, IExpressionCompiler)
+    and recognizes its extension nodes (AsyncBlockExpression, EnumerableBlockExpression).
+    Only 4 of this project's 21 files touch it.
+  -->
   <ItemGroup>
-    <ProjectReference Include="..\Hyperbee.Expressions\Hyperbee.Expressions.csproj" />
+    <PackageReference Include="Hyperbee.Expressions" />
   </ItemGroup>
 
   <ItemGroup>
