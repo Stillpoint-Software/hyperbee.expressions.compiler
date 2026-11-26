@@ -44,31 +44,24 @@
 
 
   <!--
-    Shared internal helpers, linked into each project that needs them rather than
-    packaged, which is how dotnet/runtime shares its own internal helpers. Listed
-    per file, not globbed, so this project compiles only what it uses: the glob
-    previously pulled in EmptyReadOnly and ExpressionDebugView, which it does not.
+    Internal helpers live in this project's Internal folder and compile like any
+    other source. NetstandardShims.cs is the exception: it is removed from every
+    target but netstandard2.1, the way dotnet/runtime conditions its polyfills.
 
-    These files are duplicated in hyperbee.expressions by design. They are internal,
-    so nothing crosses an assembly boundary and the copies cannot disagree about any
-    contract. Packaging them was considered and rejected: see the note in
-    Hyperbee.Expressions.Abstractions.csproj for the measured reason.
+    hyperbee.expressions carries its own copies of ThrowIf.cs and
+    NetstandardShims.cs. They are internal, so nothing crosses an assembly
+    boundary and the copies cannot disagree about any contract. Sharing them through
+    Hyperbee.Expressions.Abstractions was tried and rejected; the measured reason is
+    recorded in that package's csproj in hyperbee.expressions.
   -->
-  <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)..\Shared\ThrowIf.cs"
-             Link="Shared\ThrowIf.cs" />
-  </ItemGroup>
-
-  <!-- netstandard2.1 polyfills only; see the note at the top of the file. -->
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
-    <Compile Include="$(MSBuildThisFileDirectory)..\Shared\NetstandardShims.cs"
-             Link="Shared\NetstandardShims.cs" />
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.1'">
+    <Compile Remove="Internal\NetstandardShims.cs" />
   </ItemGroup>
 
   <!--
     netstandard2.1 needs Microsoft.Bcl.AsyncInterfaces for IAsyncEnumerable.
     The compiler-required attributes and the reflection shim are hand-written in
-    src/Shared/NetstandardShims.cs; see the note there on why not Polyfill.
+    Internal/NetstandardShims.cs; see the note there on why not Polyfill.
   -->
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
     <!-- Pinned to match Hyperbee.Expressions; see the note on the same group there. -->

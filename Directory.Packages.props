@@ -24,7 +24,7 @@
       trees that the compiler is pointed at. The shipped library does not.
     -->
     <PackageVersion Include="Hyperbee.Expressions" Version="1.7.1" />
-    <!-- netstandard2.1 support only; see src/Shared and the csproj conditions. -->
+    <!-- netstandard2.1 support only; see Internal/NetstandardShims.cs and the csproj conditions. -->
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="11.0.0" />
   </ItemGroup>
   <ItemGroup>

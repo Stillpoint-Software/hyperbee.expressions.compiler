@@ -253,11 +253,12 @@ The compiler uses a four-stage pipeline:
 built directly. `netstandard2.1` takes their place, so a `net8.0` or `net9.0` project
 resolves that asset and keeps working.
 
-The `netstandard2.1` asset is functionally complete. Every `NETSTANDARD` conditional
-in the repository lives in `src/Shared`, and all of it supplies types newer targets
-have in box: the compiler-required attributes, an empty-collection helper and two
-argument-check helpers. No compiler API is withheld on that target. The asset also
-pulls `Microsoft.Bcl.AsyncInterfaces` 8.0.0 for `IAsyncEnumerable`.
+The `netstandard2.1` asset is functionally complete. Everything that differs on that
+target lives in the compiler's `Internal` folder, and all of it supplies types newer
+targets have in box: the compiler-required attributes and a reflection shim in
+`NetstandardShims.cs`, which is compiled for that target only, and two
+argument-check helpers in `ThrowIf.cs`. No compiler API is withheld on that target.
+The asset also pulls `Microsoft.Bcl.AsyncInterfaces` 8.0.0 for `IAsyncEnumerable`.
 
 ## Dependencies
 

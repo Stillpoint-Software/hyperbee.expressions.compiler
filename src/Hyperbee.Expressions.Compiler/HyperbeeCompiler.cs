@@ -7,7 +7,7 @@ using Hyperbee.Expressions.Compiler.IR;
 using Hyperbee.Expressions.Compiler.Lowering;
 using Hyperbee.Expressions.Compiler.Passes;
 using Hyperbee.Expressions.CompilerServices;
-using Hyperbee.Expressions.Shared;
+using Hyperbee.Expressions.Internal;
 
 namespace Hyperbee.Expressions.Compiler;
 
