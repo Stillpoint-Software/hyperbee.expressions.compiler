@@ -17,13 +17,13 @@
       CoroutineBuilderContext and CoroutineClosureRewriter. This package has no
       dependencies of its own, so the compiler library takes none either.
     -->
-    <PackageVersion Include="Hyperbee.Expressions.Abstractions" Version="1.7.0" />
+    <PackageVersion Include="Hyperbee.Expressions.Abstractions" Version="1.7.1" />
     <!--
       The expression library itself, which owns AsyncBlockExpression and
       BlockAsync. Only the tests and benchmarks need it: they build the coroutine
       trees that the compiler is pointed at. The shipped library does not.
     -->
-    <PackageVersion Include="Hyperbee.Expressions" Version="1.7.0" />
+    <PackageVersion Include="Hyperbee.Expressions" Version="1.7.1" />
     <!-- netstandard2.1 support only; see src/Shared and the csproj conditions. -->
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="11.0.0" />
   </ItemGroup>
