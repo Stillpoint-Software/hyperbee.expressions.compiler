@@ -43,7 +43,7 @@ namespace System.Runtime.CompilerServices
     }
 }
 
-namespace Hyperbee.Expressions.Internal
+namespace Hyperbee.Expressions.Compiler.Internal
 {
     /// <summary>
     /// Stands in for the generic <c>MethodInfo.CreateDelegate&lt;T&gt;()</c> added in .NET 5.
